@@ -1,5 +1,5 @@
 from utils.env_variables import get_env_variable
-from core.connection import DBConnection
+from core.infra.connection import DBConnection
 
 
 def run() -> None:
