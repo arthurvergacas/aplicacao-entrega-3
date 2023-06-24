@@ -12,11 +12,11 @@ class HomePage(Page):
             "Aplicação desenvolvida para o trabalho final da disciplina SCC0240 - Bases de Dados",
             "",
             "Desenvolvido por:",
-            "Arthur Vergaças | 12542672",
-            "Guilherme Panza | 12543519",
-            "Henrique Bovo | 12542539",
-            "Maria Júlia De Grandi | 12542501",
-            "Théo Bruno Riffel | 12547812",
+            f"{'Arthur Vergaças':<22} | 12542672",
+            f"{'Guilherme Panza':<22} | 12543519",
+            f"{'Henrique Bovo':<22} | 12542539",
+            f"{'Maria Júlia De Grandi':<22} | 12542501",
+            f"{'Théo Bruno Riffel':<22} | 12547812",
             "",
         ]  # type: ignore
 
