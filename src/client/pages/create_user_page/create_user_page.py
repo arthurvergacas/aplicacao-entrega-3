@@ -2,6 +2,9 @@ from client.pages.page import Page
 from client.pages.pages import Pages
 from models.user import User
 from core.services.user_service import UserService
+from client.pages.create_user_page.enums.create_user_page_options import (
+    CreateUserPageOptions,
+)
 import utils.console_utils as console_utils
 
 
@@ -17,6 +20,21 @@ class CreateUserPage(Page):
         new_user = self.__read_new_user()
 
         UserService.create_user(new_user)
+
+        print()
+        print(
+            console_utils.box(["", f"Usuário {new_user.name} criado com sucesso.", ""])
+        )
+
+        option = self._handle_input(
+            ["Criar outro usuário", "Voltar para a tela inicial"], CreateUserPageOptions
+        )
+
+        match option:
+            case CreateUserPageOptions.CREATE_AGAIN:
+                return Pages.CREATE_USER
+            case CreateUserPageOptions.RETURN_HOME:
+                return Pages.HOME
 
         return Pages.CREATE_USER
 
