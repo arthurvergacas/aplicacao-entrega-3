@@ -5,10 +5,9 @@ from core.infra.connection import DBConnection
 
 
 class UserService:
-    __connection = DBConnection.create()
-
     @staticmethod
     def search_users(name: Optional[str] = None) -> list[User]:
+        connection = DBConnection()
         return []
 
     @staticmethod

@@ -7,11 +7,25 @@ from utils.env_variables import get_env_variable
 class DBConnection:
     connection: oracledb.Connection | None = None
 
-    def __init__(self, db_data_source: str, db_user: str, db_password: str) -> None:
+    def __init__(
+        self,
+        db_data_source: Optional[str] = None,
+        db_user: Optional[str] = None,
+        db_password: Optional[str] = None,
+    ) -> None:
         if DBConnection.connection is None:
-            DBConnection.connection = self.__create_connection(
-                db_data_source, db_user, db_password
-            )
+            if (
+                db_data_source is not None
+                and db_user is not None
+                and db_password is not None
+            ):
+                DBConnection.connection = self.__create_connection(
+                    db_data_source, db_user, db_password
+                )
+            else:
+                raise Exception(
+                    "Database connection not created. Use DBConnection.create() before instantiating a new DBConnection"
+                )
 
     def execute(
         self, statement: str, parameters: Optional[dict[Any, Any]] = None
@@ -32,8 +46,6 @@ class DBConnection:
         connection: oracledb.Connection = oracledb.connect(
             user=db_user, password=db_password, dsn=db_data_source
         )
-
-        print("Successfully connected to Oracle Database")
 
         return connection
 
