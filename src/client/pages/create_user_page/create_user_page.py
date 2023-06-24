@@ -1,6 +1,7 @@
 from client.pages.page import Page
 from client.pages.pages import Pages
 from models.user import User
+from core.services.user_service import UserService
 import utils.console_utils as console_utils
 
 
@@ -14,6 +15,8 @@ class CreateUserPage(Page):
 
     def run_page(self) -> Pages:
         new_user = self.__read_new_user()
+
+        UserService.create_user(new_user)
 
         return Pages.CREATE_USER
 

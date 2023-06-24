@@ -1,6 +1,7 @@
 from client.pages.page import Page
 from client.pages.pages import Pages
-from src.models.user import User
+from core.services.user_service import UserService
+from models.user import User
 import utils.console_utils as console_utils
 
 
@@ -14,6 +15,12 @@ class ListUsersPage(Page):
 
     def run_page(self) -> Pages:
         user_name_filter = self.__get_user_name_filter()
+
+        users = UserService.search_users(
+            user_name_filter if user_name_filter != "" else None
+        )
+
+        self.__print_users(users)
 
         return Pages.LIST_USERS
 
@@ -35,6 +42,13 @@ class ListUsersPage(Page):
         return input(console_utils.tab + "Nome: ")
 
     def __print_users(self, users: list[User]) -> None:
+        if len(users) == 0:
+            print()
+            print(console_utils.center("Nenhum usuário encontrado"))
+            print()
+
+            return
+
         print("-" * console_utils.console_width)
 
         for user in users:
