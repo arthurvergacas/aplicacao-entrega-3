@@ -16,17 +16,18 @@ class ConsoleApp:
         self.current_page: Page = self.page_dict[Pages.HOME]
 
     def run(self) -> None:
-        if not self.__initialize_db_connection():
-            self.__exit()
-
         running = True
-        while running:
-            try:
+        try:
+            if not self.__initialize_db_connection():
+                self.__exit()
+
+            while running:
                 next_page = self.current_page.run()
                 self.current_page = self.page_dict[next_page]
-            except KeyboardInterrupt:
-                running = False
-                self.__exit()
+
+        except KeyboardInterrupt:
+            running = False
+            self.__exit()
 
     def __initialize_db_connection(self) -> bool:
         print()
