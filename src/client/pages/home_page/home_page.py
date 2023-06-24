@@ -21,33 +21,12 @@ class HomePage(Page):
         ]  # type: ignore
 
     def run_page(self) -> Pages:
-        self._show_input_options(["1 - Buscar usuários", "2 - Criar novo usuário"])
-
-        option = self.__handle_input()
+        option = self._handle_input(
+            ["Buscar usuários", "Criar novo usuário"], HomePageOptions
+        )
 
         match option:
             case HomePageOptions.SEARCH_USERS:
                 return Pages.LIST_USERS
             case HomePageOptions.CREATE_USER:
                 return Pages.CREATE_USER
-
-    def __handle_input(self) -> HomePageOptions:
-        first_invalid = True
-
-        while True:
-            try:
-                return HomePageOptions(
-                    int(input(console_utils.tab + "Opção desejada: "))
-                )
-            except ValueError:
-                console_utils.clear_line()
-
-                if not first_invalid:
-                    console_utils.clear_line()
-
-                first_invalid = False
-
-                print(
-                    console_utils.tab
-                    + "Opção inválida. Digite o número de uma das opções disponíveis."
-                )
