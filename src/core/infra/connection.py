@@ -1,5 +1,7 @@
-from typing import Any, Optional
+from __future__ import annotations
+from typing import Any, Optional, Type
 import oracledb
+from utils.env_variables import get_env_variable
 
 
 class DBConnection:
@@ -19,8 +21,7 @@ class DBConnection:
                 "You must instantiate DBConnection before executing SQL statements"
             )
 
-        result_cursor: oracledb.Cursor | None =
-                DBConnection.connection.cursor().execute(statement, parameters)  # type: ignore # 😠
+        result_cursor: oracledb.Cursor | None = DBConnection.connection.cursor().execute(statement, parameters)  # type: ignore # 😠
 
         if result_cursor is not None:
             return result_cursor
@@ -35,3 +36,11 @@ class DBConnection:
         print("Successfully connected to Oracle Database")
 
         return connection
+
+    @classmethod
+    def create(cls: Type[DBConnection]) -> DBConnection:
+        return DBConnection(
+            get_env_variable("DB_DATA_SOURCE"),
+            get_env_variable("DB_USER"),
+            get_env_variable("DB_PASSWORD"),
+        )
