@@ -19,6 +19,8 @@ class CreateUserPage(Page):
     def run_page(self) -> Pages:
         new_user = self.__read_new_user()
 
+        # TODO aqui precisa ter error handling pra saber se printa o usuário criado com sucesso ali
+        # ou se printa erro e manda fazer dnv
         UserService.create_user(new_user)
 
         print()
