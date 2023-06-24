@@ -1,5 +1,6 @@
 from client.pages.page import Page
 from client.pages.pages import Pages
+from src.models.user import User
 import utils.console_utils as console_utils
 
 
@@ -32,3 +33,10 @@ class ListUsersPage(Page):
         print()
 
         return input(console_utils.tab + "Nome: ")
+
+    def __print_users(self, users: list[User]) -> None:
+        print("-" * console_utils.console_width)
+
+        for user in users:
+            print(user)
+            print("-" * console_utils.console_width)
