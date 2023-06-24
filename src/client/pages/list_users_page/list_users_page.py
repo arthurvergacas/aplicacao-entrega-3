@@ -2,6 +2,10 @@ from client.pages.page import Page
 from client.pages.pages import Pages
 from core.services.user_service import UserService
 from models.user import User
+from client.pages.list_users_page.enums.list_users_page_options import (
+    ListUsersPageOptions,
+)
+
 import utils.console_utils as console_utils
 
 
@@ -22,7 +26,15 @@ class ListUsersPage(Page):
 
         self.__print_users(users)
 
-        return Pages.LIST_USERS
+        option = self._handle_input(
+            ["Nova busca", "Voltar para a tela inicial"], ListUsersPageOptions
+        )
+
+        match option:
+            case ListUsersPageOptions.SEARCH_AGAIN:
+                return Pages.LIST_USERS
+            case ListUsersPageOptions.RETURN_HOME:
+                return Pages.HOME
 
     def __get_user_name_filter(self) -> str:
         print()
