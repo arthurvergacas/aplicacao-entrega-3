@@ -42,9 +42,7 @@ class ConsoleApp:
             print()
             print(console_utils.tab + "Mensagem de erro:")
 
-            error_msg_lines = str(e).split("\n")
-
-            for error_msg_line in error_msg_lines:
+            for error_msg_line in str(e).split("\n"):
                 print(console_utils.tab * 2 + error_msg_line)
 
             print()
