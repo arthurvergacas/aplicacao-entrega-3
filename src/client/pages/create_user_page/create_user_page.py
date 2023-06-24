@@ -19,7 +19,7 @@ class CreateUserPage(Page):
 
     def __read_new_user(self) -> User:
         print()
-        print(console_utils.center("Preencha os campos abaixo para criar o usuário"))
+        print(console_utils.center("Preencha os campos abaixo para criar o usuário."))
 
         new_user = User()
 
