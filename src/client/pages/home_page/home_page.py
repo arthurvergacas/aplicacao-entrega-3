@@ -21,7 +21,7 @@ class HomePage(Page):
         ]  # type: ignore
 
     def run_page(self) -> Pages:
-        self.__input_options()
+        self._show_input_options(["1 - Buscar usuários", "2 - Criar novo usuário"])
 
         option = self.__handle_input()
 
@@ -30,16 +30,6 @@ class HomePage(Page):
                 return Pages.LIST_USERS
             case HomePageOptions.CREATE_USER:
                 return Pages.CREATE_USER
-
-    def __input_options(self) -> None:
-        print()
-        print(console_utils.center("Digite o número de uma das opções abaixo:"))
-
-        print()
-
-        print(console_utils.itemize(["1 - Buscar usuários", "2 - Criar novo usuário"]))
-
-        print()
 
     def __handle_input(self) -> HomePageOptions:
         first_invalid = True

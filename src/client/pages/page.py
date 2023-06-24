@@ -25,3 +25,13 @@ class Page(ABC):
     @abstractmethod
     def run_page(self) -> Pages:
         pass
+
+    def _show_input_options(self, options: list[str]) -> None:
+        print()
+        print(console_utils.center("Digite o número de uma das opções abaixo:"))
+
+        print()
+
+        print(console_utils.itemize(options))
+
+        print()
