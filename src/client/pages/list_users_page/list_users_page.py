@@ -13,8 +13,8 @@ class ListUsersPage(Page):
     @property
     def title(self):
         return (super().title if type(super().title) is list else [super().title]) + [
-            "BUSCAR USUÁRIOS",
             "",
+            "BUSCAR USUÁRIOS",
         ]  # type: ignore
 
     def run_page(self) -> Pages:

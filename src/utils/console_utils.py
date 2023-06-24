@@ -12,6 +12,9 @@ def box(text: list[str] | str) -> str:
     if type(text) is str:
         text = [text]
 
+    text.insert(0, "")  # type: ignore
+    text.insert(len(text), "")  # type: ignore
+
     for line in text:
         result += line.center(console_width - 2, " ").center(console_width, "#") + "\n"
 

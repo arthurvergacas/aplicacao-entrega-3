@@ -9,6 +9,7 @@ class HomePage(Page):
     @property
     def title(self):
         return (super().title if type(super().title) is list else [super().title]) + [
+            "",
             "Aplicação desenvolvida para o trabalho final da disciplina SCC0240 - Bases de Dados",
             "",
             "Desenvolvido por:",
@@ -17,7 +18,6 @@ class HomePage(Page):
             f"{'Henrique Bovo':<22} | 12542539",
             f"{'Maria Júlia De Grandi':<22} | 12542501",
             f"{'Théo Bruno Riffel':<22} | 12547812",
-            "",
         ]  # type: ignore
 
     def run_page(self) -> Pages:

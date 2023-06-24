@@ -11,11 +11,7 @@ EnumGenericType = TypeVar("EnumGenericType", bound=Enum)
 class Page(ABC):
     @abstractproperty
     def title(self) -> list[str] | str:
-        return [
-            "",
-            "GERENCIAMENTO DE DADOS - IRIS",
-            "",
-        ]
+        return "GERENCIAMENTO DE DADOS - IRIS"
 
     def run(self) -> Pages:
         console_utils.clear_terminal()

@@ -12,8 +12,8 @@ class CreateUserPage(Page):
     @property
     def title(self):
         return (super().title if type(super().title) is list else [super().title]) + [
-            "NOVO USUÁRIO",
             "",
+            "NOVO USUÁRIO",
         ]  # type: ignore
 
     def run_page(self) -> Pages:
@@ -24,9 +24,7 @@ class CreateUserPage(Page):
         UserService.create_user(new_user)
 
         print()
-        print(
-            console_utils.box(["", f"Usuário {new_user.name} criado com sucesso.", ""])
-        )
+        print(console_utils.box(f"Usuário {new_user.name} criado com sucesso."))
 
         option = self._handle_input(
             ["Criar outro usuário", "Voltar para a tela inicial"], CreateUserPageOptions
