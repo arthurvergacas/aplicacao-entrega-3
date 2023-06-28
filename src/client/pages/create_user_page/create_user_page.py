@@ -36,8 +36,6 @@ class CreateUserPage(Page):
             case CreateUserPageOptions.RETURN_HOME:
                 return Pages.HOME
 
-        return Pages.CREATE_USER
-
     def __read_new_user(self) -> User:
         print()
         print(console_utils.center("Preencha os campos abaixo para criar o usuário."))
