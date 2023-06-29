@@ -19,7 +19,7 @@ Por conveniência, é disponibilizado um arquivo `.env.sample` em que você pode
 
 ### Rodando a aplicação
 
-Para executar o projeto, você deve ter instalado na sua máquina o **Python** na versão **3.7 ou superior**.
+Para executar o projeto, você deve ter instalado na sua máquina o **Python** na versão **3.10 ou superior**.
 
 Na _root_ do projeto, rode o seguinte comando para instalar as dependências do projeto:
 
