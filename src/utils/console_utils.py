@@ -51,6 +51,6 @@ def print_error_msg(msg: str, e: Exception) -> None:
     print(tab + "Mensagem de erro:")
 
     for error_msg_line in str(e).split("\n"):
-        print(tab * 2 + error_msg_line)
+        print(colored(tab * 2 + error_msg_line, 'red'))
 
     print()

@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod, abstractproperty
 from enum import Enum
 from typing import Type, TypeVar
+
+from termcolor import colored
 from client.pages.pages import Pages
 import utils.console_utils as console_utils
 
@@ -65,5 +67,5 @@ class Page(ABC):
 
                 print(
                     console_utils.tab
-                    + "Opção inválida. Digite o número de uma das opções disponíveis."
+                    + colored("Opção inválida. Digite o número de uma das opções disponíveis.", 'red')
                 )
