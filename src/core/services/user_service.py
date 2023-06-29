@@ -11,10 +11,10 @@ class UserService:
         select = """
         SELECT *
         FROM USUARIO U
-        WHERE U.nome LIKE :name
+        WHERE LOWER(U.nome) LIKE :name
         """
 
-        cursor = connection.execute(select, {"name": f"%{name.strip()}%"})
+        cursor = connection.execute(select, {"name": f"%{name.lower().strip()}%"})
 
         if cursor is None:
             return []
