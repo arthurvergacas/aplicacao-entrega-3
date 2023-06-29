@@ -1,5 +1,7 @@
 import os
 
+from termcolor import colored
+
 tab = " " * 4
 console_width = os.get_terminal_size().columns
 
@@ -44,7 +46,7 @@ def clear_line() -> None:
     print("\033[F\033[K", end="")
 
 def print_error_msg(msg: str, e: Exception) -> None:
-    print(center(msg))
+    print(colored(center(msg), 'red'))
     print()
     print(tab + "Mensagem de erro:")
 

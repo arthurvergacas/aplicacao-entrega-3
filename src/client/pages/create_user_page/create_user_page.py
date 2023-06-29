@@ -1,3 +1,4 @@
+from termcolor import colored
 from client.pages.page import Page
 from client.pages.pages import Pages
 from models.user import User
@@ -27,7 +28,7 @@ class CreateUserPage(Page):
             console_utils.print_error_msg("Falha ao criar usuário.", e)
 
         else:
-            print(console_utils.box(f"Usuário {new_user.name} criado com sucesso."))
+            print(colored(console_utils.box(f"Usuário {new_user.name} criado com sucesso."), 'green'))
 
         option = self._handle_input(
             ["Criar outro usuário", "Voltar para a tela inicial"], CreateUserPageOptions
