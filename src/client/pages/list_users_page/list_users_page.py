@@ -21,9 +21,7 @@ class ListUsersPage(Page):
         user_name_filter = self.__get_user_name_filter()
 
         try:
-            users = UserService.search_users(
-                user_name_filter if user_name_filter != "" else None
-            )
+            users = UserService.search_users(user_name_filter)
         except Exception as e:
             console_utils.print_error_msg("Erro na busca de usuários.", e)
         else:
