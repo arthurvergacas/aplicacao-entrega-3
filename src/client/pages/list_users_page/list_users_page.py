@@ -20,12 +20,14 @@ class ListUsersPage(Page):
     def run_page(self) -> Pages:
         user_name_filter = self.__get_user_name_filter()
 
-        # TODO aqui precisa de error handling pra mostrar o erro ali embaixo
-        users = UserService.search_users(
-            user_name_filter if user_name_filter != "" else None
-        )
-
-        self.__print_users(users)
+        try:
+            users = UserService.search_users(
+                user_name_filter if user_name_filter != "" else None
+            )
+        except Exception as e:
+            console_utils.print_error_msg("Erro na busca de usuários.", e)
+        else:
+            self.__print_users(users)
 
         option = self._handle_input(
             ["Nova busca", "Voltar para a tela inicial"], ListUsersPageOptions

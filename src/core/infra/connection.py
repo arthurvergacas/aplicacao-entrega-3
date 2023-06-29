@@ -34,7 +34,6 @@ class DBConnection:
             raise Exception(
                 "You must instantiate DBConnection before executing SQL statements"
             )
-
         result_cursor: oracledb.Cursor | None = DBConnection.connection.cursor().execute(statement, parameters)  # type: ignore # 😠
         DBConnection.connection.commit()
 

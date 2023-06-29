@@ -8,8 +8,17 @@ class UserService:
     @staticmethod
     def search_users(name: Optional[str] = None) -> list[User]:
         connection = DBConnection()
+        select = """
+        SELECT * 
+        FROM USUARIO U
+        WHERE U.nome LIKE :name
+        """
+        print(name)
+        cursor = connection.execute(select, {"name":f"'%{name}%'"})
+        data = cursor.fetchall()    
+        print(cursor.bindnames())
 
-        return []
+        return [User(*row) for row in data]
 
     @staticmethod
     def create_user(user: User) -> None:
