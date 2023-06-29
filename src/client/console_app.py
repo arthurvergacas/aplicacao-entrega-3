@@ -38,14 +38,7 @@ class ConsoleApp:
             DBConnection.create()
             return True
         except Exception as e:
-            print(console_utils.center("Não foi possível se conectar ao banco."))
-            print()
-            print(console_utils.tab + "Mensagem de erro:")
-
-            for error_msg_line in str(e).split("\n"):
-                print(console_utils.tab * 2 + error_msg_line)
-
-            print()
+            console_utils.print_error_msg("Não foi possível se conectar ao banco.", e)
 
             return False
 
