@@ -37,9 +37,8 @@ class DBConnection:
         result_cursor: oracledb.Cursor | None = DBConnection.connection.cursor().execute(statement, parameters)  # type: ignore # 😠
         DBConnection.connection.commit()
 
-        if result_cursor is not None:
-            return result_cursor
-        
+        return result_cursor
+
     def __create_connection(
         self, db_data_source: str, db_user: str, db_password: str
     ) -> oracledb.Connection:
@@ -56,4 +55,4 @@ class DBConnection:
             get_env_variable("DB_USER"),
             get_env_variable("DB_PASSWORD"),
         )
-    
+
