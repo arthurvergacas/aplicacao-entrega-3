@@ -1,3 +1,4 @@
+import oracledb
 from client.pages.create_user_page.create_user_page import CreateUserPage
 from client.pages.home_page.home_page import HomePage
 from client.pages.list_users_page.list_users_page import ListUsersPage
@@ -37,7 +38,7 @@ class ConsoleApp:
         try:
             DBConnection.create()
             return True
-        except Exception as e:
+        except oracledb.DatabaseError as e:
             console_utils.print_error_msg("Não foi possível se conectar ao banco.", e)
 
             return False

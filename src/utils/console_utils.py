@@ -1,4 +1,5 @@
 import os
+from typing import Optional
 
 from termcolor import colored
 
@@ -45,12 +46,19 @@ def clear_terminal() -> None:
 def clear_line() -> None:
     print("\033[F\033[K", end="")
 
-def print_error_msg(msg: str, e: Exception) -> None:
-    print(colored(center(msg), 'red'))
-    print()
-    print(tab + "Mensagem de erro:")
 
-    for error_msg_line in str(e).split("\n"):
-        print(colored(tab * 2 + error_msg_line, 'red'))
+def print_error_msg(msg: str | list[str], e: Optional[Exception] = None) -> None:
+    if type(msg) is str:
+        print(colored(center(msg), "red"))
+    else:
+        for m in msg:
+            print(colored(center(m), "red"))
 
-    print()
+    if e is not None:
+        print()
+        print(tab + "Mensagem de erro:")
+
+        for error_msg_line in str(e).split("\n"):
+            print(colored(tab * 2 + error_msg_line, "red"))
+
+        print()

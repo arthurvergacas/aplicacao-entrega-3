@@ -1,3 +1,4 @@
+import oracledb
 from termcolor import colored
 from client.pages.page import Page
 from client.pages.pages import Pages
@@ -20,15 +21,20 @@ class CreateUserPage(Page):
     def run_page(self) -> Pages:
         new_user = self.__read_new_user()
         print()
-        
+
         try:
             UserService.create_user(new_user)
-
-        except Exception as e:
-            console_utils.print_error_msg("Falha ao criar usuário.", e)
-
+        except oracledb.DatabaseError as e:
+            console_utils.print_error_msg(
+                ["Falha ao criar usuário.", self.__get_user_creation_error_message(e)]
+            )
         else:
-            print(colored(console_utils.box(f"Usuário {new_user.name} criado com sucesso."), 'green'))
+            print(
+                colored(
+                    console_utils.box(f"Usuário {new_user.name} criado com sucesso."),
+                    "green",
+                )
+            )
 
         option = self._handle_input(
             ["Criar outro usuário", "Voltar para a tela inicial"], CreateUserPageOptions
@@ -60,3 +66,22 @@ class CreateUserPage(Page):
         new_user.img_url = input(console_utils.tab + "Imagem (url): ")
 
         return new_user
+
+    def __get_user_creation_error_message(self, e: oracledb.DatabaseError) -> str:
+        (error_obj,) = e.args
+
+        match error_obj.code:
+            case 1:
+                return "CPF ou email já cadastrados."
+            case 1400:
+                return "E-mail, CPF, Nome e Data de nascimento não devem ficar vazios."
+            case 1858:
+                return (
+                    "O CPF e a data de nascimento devem ter somente valores numéricos."
+                )
+            case 1840 | 1861:
+                return "A data de nascimento deve ter o formato DD/MM/YYYY."
+            case 2290:
+                return "O CPF deve ser uma sequência de 11 algarismos."
+            case _:
+                return "Um erro desconhecido ocorreu."

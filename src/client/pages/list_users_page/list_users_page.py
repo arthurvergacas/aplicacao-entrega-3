@@ -1,3 +1,4 @@
+import oracledb
 from client.pages.page import Page
 from client.pages.pages import Pages
 from core.services.user_service import UserService
@@ -22,8 +23,8 @@ class ListUsersPage(Page):
 
         try:
             users = UserService.search_users(user_name_filter)
-        except Exception as e:
-            console_utils.print_error_msg("Erro na busca de usuários.", e)
+        except oracledb.DatabaseError:
+            console_utils.print_error_msg("Erro na busca de usuários.")
         else:
             self.__print_users(users)
 
